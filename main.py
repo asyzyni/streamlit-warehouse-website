@@ -22,7 +22,7 @@ class WarehouseDemandApp:
             self.categorical_cols = column_mapping["categorical_cols"]
             self.numerical_cols = column_mapping["numerical_cols"]
 
-        self.historical_df = pd.read_excel("/Users/asyzyni/Documents/GitHub/streamlit-warehouse-website/warehouse data.xlsx")
+        self.historical_df = pd.read_excel("warehouse data.xlsx")
         self.historical_df['Date'] = pd.to_datetime(self.historical_df['Date'])
 
         self.LOCATIONS = ["Batam", "Bekasi", "Cibitung", "Jakarta", "Makassar", "Surabaya", "Medan", "Tangerang", "Semarang", "Sidoarjo"]
