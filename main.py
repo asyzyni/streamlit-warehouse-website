@@ -14,26 +14,27 @@ import os
 
 class WarehouseDemandApp:
     def __init__(self):
-        # Mendapatkan path absolut ke folder artifacts
+        # Path absolut ke direktori file ini
+        base_path = os.path.dirname(os.path.abspath(__file__))
 
-        
-        # Load model dan file pendukung dengan path absolut
-        self.model = joblib.load("xgboost_model.pkl")
-        self.encoder = joblib.load("onehot_encoder.pkl")
-        self.scaler = joblib.load("standard_scaler.pkl")
+        # Load model dan file pendukung
+        self.model = joblib.load(os.path.join(base_path, "xgboost_model.pkl"))
+        self.encoder = joblib.load(os.path.join(base_path, "onehot_encoder.pkl"))
+        self.scaler = joblib.load(os.path.join(base_path, "standard_scaler.pkl"))
 
         # Load column mapping
-        with open(os.path.join("column_mapping.json"), "r") as f:
+        with open(os.path.join(base_path, "column_mapping.json"), "r") as f:
             column_mapping = json.load(f)
             self.categorical_cols = column_mapping["categorical_cols"]
             self.numerical_cols = column_mapping["numerical_cols"]
 
         # Load data historis
-        data_path =  "warehouse data.xlsx"
+        data_path = os.path.join(base_path, "warehouse data.xlsx")
         self.historical_df = pd.read_excel(data_path)
         self.historical_df['Date'] = pd.to_datetime(self.historical_df['Date'])
-                                                    
+
         self.LOCATIONS = ["Batam", "Bekasi", "Cibitung", "Jakarta", "Makassar", "Surabaya", "Medan", "Tangerang", "Semarang", "Sidoarjo"]
+
         self.PRODUCT_CATALOG = {
             "AC (Air Conditioner)": ["Cassette 2 PK", "Portable AC 1 PK", "Split 0.5 PK", "Split 1 PK", "Split 1.5 PK Inverter", "Standing Floor 2.5 PK"],
             "Televisi": ["LED 24'", "LED 32'", "LED 43'", "Smart TV 50'", "OLED 55'", "QLED 65'"],
@@ -45,14 +46,14 @@ class WarehouseDemandApp:
             "Blender": ["Blender Kaca", "Blender Plastik", "Mini Blender", "2 in 1 Blender (Blender + Grinder)"],
             "Kipas Angin": ["Kipas Meja", "Kipas Berdiri", "Kipas Dinding", "Kipas Remote Control"],
         }
+
         self.LOCATIONS_COORDINATES = {
             "Batam": (-1.0489, 104.0305), "Bekasi": (-6.2383, 106.9756), "Cibitung": (-6.2684, 107.0844),
             "Jakarta": (-6.2088, 106.8456), "Makassar": (-5.1477, 119.4327), "Surabaya": (-7.2504, 112.7688),
             "Medan": (3.5952, 98.6722), "Tangerang": (-6.1783, 106.6319), "Semarang": (-7.0051, 110.4381), "Sidoarjo": (-7.4478, 112.7183)
         }
 
-
-    def detect_event(input_date: date):
+    def detect_event(self, input_date: date):
         events = {
             (1, 1): ("New_Year", 1.2, 0.3), (8, 17): ("Kemerdekaan", 1.2, 0.3),
             (12, 25): ("Natal", 1.4, 0.4), (1, 29): ("Imlek", 1.3, 0.35),
