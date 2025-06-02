@@ -1,0 +1,1 @@
+{"categorical_cols": ["Category", "Type", "Location", "Event"], "numerical_cols": ["Event_Multiplier", "Safety Percentage", "Moving_Average", "Multiplier_Safety"]}
