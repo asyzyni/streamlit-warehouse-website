@@ -13,11 +13,11 @@ import plotly.express as px
 
 class WarehouseDemandApp:
     def __init__(self):
-        self.model = joblib.load("/Users/asyzyni/Documents/GitHub/streamlit-warehouse-website/artifacts/xgboost_model.pkl")
-        self.encoder = joblib.load("/Users/asyzyni/Documents/GitHub/streamlit-warehouse-website/artifacts/onehot_encoder.pkl")
-        self.scaler = joblib.load("/Users/asyzyni/Documents/GitHub/streamlit-warehouse-website/artifacts/standard_scaler.pkl")
+        self.model = joblib.load("artifacts/xgboost_model.pkl")
+        self.encoder = joblib.load("artifacts/onehot_encoder.pkl")
+        self.scaler = joblib.load("artifacts/standard_scaler.pkl")
 
-        with open("/Users/asyzyni/Documents/GitHub/streamlit-warehouse-website/artifacts/column_mapping.json", "r") as f:
+        with open("artifacts/column_mapping.json", "r") as f:
             column_mapping = json.load(f)
             self.categorical_cols = column_mapping["categorical_cols"]
             self.numerical_cols = column_mapping["numerical_cols"]
