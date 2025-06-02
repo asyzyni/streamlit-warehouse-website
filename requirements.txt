@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 absl-py==2.1.0
 aiobotocore @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_bba52b0nnu/croot/aiobotocore_1701291516116/work
 aiohttp @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_b1m9c8aqie/croot/aiohttp_1707342290832/work
@@ -392,3 +393,17 @@ zict @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_29a3x
 zipp @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_31jm3q76eq/croot/zipp_1704206913245/work
 zope.interface @ file:///Users/cbousseau/work/recipes/ci_py311/zope.interface_1678055276546/work
 zstandard @ file:///Users/cbousseau/work/recipes/ci_py311_2/zstandard_1678996192313/work
+=======
+joblib==1.5.0
+pandas==2.2.3
+numpy==2.2.6
+matplotlib==3.10.3
+DateTime==5.5
+seaborn==0.13.2
+typing==3.7.4.3
+xgboost==3.0.1
+plotly==6.1.2
+scikit-learn==1.6.1
+jsonschema==4.23.0
+streamlit==1.45.1
+>>>>>>> Stashed changes
