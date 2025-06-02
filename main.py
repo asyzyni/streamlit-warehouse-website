@@ -10,21 +10,31 @@ import json
 import seaborn as sns
 import matplotlib.pyplot as plt
 import plotly.express as px
+import os
 
 class WarehouseDemandApp:
+    
     def __init__(self):
-        self.model = joblib.load("artifacts/xgboost_model.pkl")
-        self.encoder = joblib.load("artifacts/onehot_encoder.pkl")
-        self.scaler = joblib.load("artifacts/standard_scaler.pkl")
+        # Mendapatkan path absolut ke folder artifacts
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        artifacts_dir = os.path.join(base_dir, "artifacts")
+        
+        # Load model dan file pendukung dengan path absolut
+        self.model = joblib.load(os.path.join(artifacts_dir, "xgboost_model.pkl"))
+        self.encoder = joblib.load(os.path.join(artifacts_dir, "onehot_encoder.pkl"))
+        self.scaler = joblib.load(os.path.join(artifacts_dir, "standard_scaler.pkl"))
 
-        with open("artifacts/column_mapping.json", "r") as f:
+        # Load column mapping
+        with open(os.path.join(artifacts_dir, "column_mapping.json"), "r") as f:
             column_mapping = json.load(f)
             self.categorical_cols = column_mapping["categorical_cols"]
             self.numerical_cols = column_mapping["numerical_cols"]
 
-        self.historical_df = pd.read_excel("warehouse data.xlsx")
+        # Load data historis
+        data_path = os.path.join(base_dir, "warehouse data.xlsx")
+        self.historical_df = pd.read_excel(data_path)
         self.historical_df['Date'] = pd.to_datetime(self.historical_df['Date'])
-
+                                                    
         self.LOCATIONS = ["Batam", "Bekasi", "Cibitung", "Jakarta", "Makassar", "Surabaya", "Medan", "Tangerang", "Semarang", "Sidoarjo"]
         self.PRODUCT_CATALOG = {
             "AC (Air Conditioner)": ["Cassette 2 PK", "Portable AC 1 PK", "Split 0.5 PK", "Split 1 PK", "Split 1.5 PK Inverter", "Standing Floor 2.5 PK"],
