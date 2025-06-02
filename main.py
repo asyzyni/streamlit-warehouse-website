@@ -13,25 +13,23 @@ import plotly.express as px
 import os
 
 class WarehouseDemandApp:
-    
     def __init__(self):
         # Mendapatkan path absolut ke folder artifacts
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        artifacts_dir = os.path.join(base_dir, "artifacts")
+
         
         # Load model dan file pendukung dengan path absolut
-        self.model = joblib.load(os.path.join(artifacts_dir, "xgboost_model.pkl"))
-        self.encoder = joblib.load(os.path.join(artifacts_dir, "onehot_encoder.pkl"))
-        self.scaler = joblib.load(os.path.join(artifacts_dir, "standard_scaler.pkl"))
+        self.model = joblib.load("xgboost_model.pkl")
+        self.encoder = joblib.load("onehot_encoder.pkl")
+        self.scaler = joblib.load("standard_scaler.pkl")
 
         # Load column mapping
-        with open(os.path.join(artifacts_dir, "column_mapping.json"), "r") as f:
+        with open(os.path.join("column_mapping.json"), "r") as f:
             column_mapping = json.load(f)
             self.categorical_cols = column_mapping["categorical_cols"]
             self.numerical_cols = column_mapping["numerical_cols"]
 
         # Load data historis
-        data_path = os.path.join(base_dir, "warehouse data.xlsx")
+        data_path =  "warehouse data.xlsx"
         self.historical_df = pd.read_excel(data_path)
         self.historical_df['Date'] = pd.to_datetime(self.historical_df['Date'])
                                                     
@@ -53,7 +51,7 @@ class WarehouseDemandApp:
             "Medan": (3.5952, 98.6722), "Tangerang": (-6.1783, 106.6319), "Semarang": (-7.0051, 110.4381), "Sidoarjo": (-7.4478, 112.7183)
         }
 
-    @staticmethod
+
     def detect_event(input_date: date):
         events = {
             (1, 1): ("New_Year", 1.2, 0.3), (8, 17): ("Kemerdekaan", 1.2, 0.3),
