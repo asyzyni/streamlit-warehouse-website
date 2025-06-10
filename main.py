@@ -49,7 +49,7 @@ class WarehouseDemandApp:
         }
 
         self.LOCATIONS_COORDINATES = {
-            "Batam": (-1.0489, 104.0305), "Bekasi": (-6.2383, 106.9756), "Cibitung": (-6.2684, 107.0844),
+            "Batam": (1.1043, 104.0305), "Bekasi": (-6.2383, 106.9756), "Cibitung": (-6.2684, 107.0844),
             "Jakarta": (-6.2088, 106.8456), "Makassar": (-5.1477, 119.4327), "Surabaya": (-7.2504, 112.7688),
             "Medan": (3.5952, 98.6722), "Tangerang": (-6.1783, 106.6319), "Semarang": (-7.0051, 110.4381), "Sidoarjo": (-7.4478, 112.7183)
         }
